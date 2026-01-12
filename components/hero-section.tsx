@@ -1,0 +1,164 @@
+"use client"
+
+import type React from "react"
+import { useState } from "react"
+import { CheckCircle, Lock, Zap, Heart } from "lucide-react"
+
+export default function HeroSection() {
+  const [rxNumber, setRxNumber] = useState("")
+  const [submitted, setSubmitted] = useState(false)
+  const [error, setError] = useState("")
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    setError("")
+
+    if (!/^\d{6}$/.test(rxNumber)) {
+      setError("Please enter a valid 6-digit RX number")
+      return
+    }
+
+    console.log("RX Number submitted:", rxNumber)
+    setSubmitted(true)
+    setRxNumber("")
+
+    setTimeout(() => {
+      setSubmitted(false)
+    }, 5000)
+  }
+
+  return (
+    <section
+      id="home"
+      className="relative min-h-screen pt-32 pb-20 overflow-hidden"
+      style={{
+        backgroundImage:
+          "url(https://img.freepik.com/free-photo/young-female-doctor-white-medical-suit-with-stethoscope-white-protective-mask-writing-down-notes-white_140725-16510.jpg?semt=ais_hybrid&w=740&q=80)",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundAttachment: "fixed",
+      }}
+    >
+      
+      <div className="absolute inset-0 bg-gradient-to-r from-white/92 via-white/85 to-white/80" />
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/10 to-white/40" />
+
+      
+      <div className="absolute top-20 right-10 w-72 h-72 bg-accent/10 rounded-full blur-3xl animate-float" />
+      <div className="absolute bottom-20 left-10 w-96 h-96 bg-primary/8 rounded-full blur-3xl" />
+
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+        
+          <div className="animate-slideInLeft space-y-8">
+            
+            <div className="inline-flex items-center gap-2 bg-accent/15 px-4 py-2 rounded-full border border-accent/30">
+              <Heart className="w-4 h-4 text-accent" />
+              <span className="text-sm font-medium text-accent">Trusted Healthcare Partner</span>
+            </div>
+
+            
+            <h1 className="hero-title serif-heading text-foreground leading-tight">
+              Your Health,
+              <br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">
+                Our Priority
+              </span>
+            </h1>
+
+            
+            <p className="text-xl text-muted-foreground leading-relaxed font-light max-w-md">
+              Fast, secure, and professional pharmacy services. Submit your prescription and receive your medications
+              with care and precision.
+            </p>
+
+          
+            <div className="space-y-4 pt-4">
+              <div className="flex items-start gap-4 animate-slideInUp" style={{ animationDelay: "0.2s" }}>
+                <div className="mt-1 p-2 bg-primary/10 rounded-lg">
+                  <Lock className="w-5 h-5 text-primary" />
+                </div>
+                <div>
+                  <p className="font-semibold text-foreground">100% Secure</p>
+                  <p className="text-sm text-muted-foreground">HIPAA compliant & encrypted</p>
+                </div>
+              </div>
+              <div className="flex items-start gap-4 animate-slideInUp" style={{ animationDelay: "0.3s" }}>
+                <div className="mt-1 p-2 bg-secondary/10 rounded-lg">
+                  <Zap className="w-5 h-5 text-secondary" />
+                </div>
+                <div>
+                  <p className="font-semibold text-foreground">Fast Processing</p>
+                  <p className="text-sm text-muted-foreground">Same-day delivery available</p>
+                </div>
+              </div>
+              <div className="flex items-start gap-4 animate-slideInUp" style={{ animationDelay: "0.4s" }}>
+                <div className="mt-1 p-2 bg-accent/10 rounded-lg">
+                  <CheckCircle className="w-5 h-5 text-accent" />
+                </div>
+                <div>
+                  <p className="font-semibold text-foreground">Licensed Pharmacy</p>
+                  <p className="text-sm text-muted-foreground">State certified professionals</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+  
+          <div className="animate-slideInRight">
+            <div className="bg-white rounded-3xl shadow-2xl p-8 md:p-10 border border-border/50 backdrop-blur-sm hover:shadow-3xl transition-shadow duration-500">
+              <div className="mb-8">
+                <h2 className="text-3xl font-bold serif-heading text-foreground mb-3">Submit Your RX</h2>
+                <div className="w-12 h-1 bg-gradient-to-r from-primary to-secondary rounded-full" />
+              </div>
+
+              {submitted ? (
+                <div className="animate-fadeInScale bg-gradient-to-br from-secondary/5 to-accent/5 border-2 border-secondary rounded-2xl p-8 text-center space-y-4">
+                  <div className="inline-block p-3 bg-secondary/10 rounded-full">
+                    <CheckCircle className="w-12 h-12 text-secondary" />
+                  </div>
+                  <h3 className="text-2xl font-bold serif-heading text-foreground">Success!</h3>
+                  <p className="text-muted-foreground leading-relaxed">
+                    Your prescription has been received and is being processed. Check your email for updates.
+                  </p>
+                </div>
+              ) : (
+                <form onSubmit={handleSubmit} className="space-y-6">
+                  <div>
+                    <label className="block text-sm font-semibold text-foreground mb-3">Your RX Number</label>
+                    <input
+                      type="text"
+                      inputMode="numeric"
+                      maxLength={6}
+                      value={rxNumber}
+                      onChange={(e) => {
+                        const value = e.target.value.replace(/\D/g, "")
+                        setRxNumber(value)
+                        setError("")
+                      }}
+                      placeholder="000000"
+                      className="w-full px-6 py-5 text-3xl font-bold tracking-widest text-center border-2 border-border bg-input rounded-2xl focus:outline-none focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all duration-300 placeholder:text-muted-foreground/30"
+                    />
+                    {error && <p className="text-destructive text-sm mt-3 animate-slideInUp font-medium">{error}</p>}
+                  </div>
+
+                  <button
+                    type="submit"
+                    className="w-full bg-gradient-to-r from-primary to-primary/90 text-primary-foreground font-bold py-5 px-6 rounded-2xl hover:shadow-lg hover:-translate-y-1 active:translate-y-0 transition-all duration-300 text-lg"
+                  >
+                    Submit RX Number
+                  </button>
+
+                  <div className="pt-6 border-t border-border space-y-2">
+                    <p className="text-xs text-muted-foreground text-center">✓ Military-grade encryption</p>
+                    <p className="text-xs text-muted-foreground text-center">✓ No data sharing • Private & Secure</p>
+                  </div>
+                </form>
+              )}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
