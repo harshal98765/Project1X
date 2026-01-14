@@ -4,7 +4,7 @@ import { Phone } from "lucide-react"
 export default function FloatingCallButton() {
   return (
     <a
-      href="tel:+919999999999"
+      href="tel:+1 201-425-1187"
       aria-label="Call Us"
       className="
         fixed z-50 group
