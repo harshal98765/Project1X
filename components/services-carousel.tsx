@@ -4,6 +4,24 @@ import { useState, useEffect } from "react"
 import { ChevronLeft, ChevronRight, Pill, Truck, Clock, HeartHandshake, Sparkles } from "lucide-react"
 
 const services = [
+   {
+    icon: Truck,
+    title: "Free Delivery Service",
+    description:
+      "Enjoy fast, reliable home delivery of your prescriptions and health products at no extra cost convenient, secure, and right to your doorstep.",
+    color: "from-secondary/15 to-secondary/5",
+    accentColor: "text-secondary",
+    badge: "Fast Track",
+  },
+  {
+  icon: Clock,
+  title: "Always Available",
+  description:
+    "Dedicated pharmacy support available Monday–Friday 9:00 AM–6:00 PM and Saturday 9:00 AM–3:00 PM. Expert consultation whenever you need guidance on your medications.",
+  color: "from-blue-500/15 to-blue-500/5",
+  accentColor: "text-blue-600",
+  badge: "Extended Hours",
+},
   {
     icon: Pill,
     title: "Vaccinations",
@@ -12,31 +30,6 @@ const services = [
     color: "from-primary/15 to-primary/5",
     accentColor: "text-primary",
     badge: "Premium Service",
-  },
-  {
-    icon: Truck,
-    title: "Pharmacy Services",
-    description:
-      "Pharmacy services are essential healthcare services that provide medication, advice, and education to manage health conditions.",
-    color: "from-secondary/15 to-secondary/5",
-    accentColor: "text-secondary",
-    badge: "Fast Track",
-  },
-  {
-    icon: Clock,
-    title: "Always Available",
-    description: "Round-the-clock support from our dedicated pharmacy team. We're here whenever you need us.Expert consultation on your medicine",
-    color: "from-blue-500/15 to-blue-500/5",
-    accentColor: "text-blue-600",
-    badge: "24/7 Support",
-  },
-  {
-    icon: HeartHandshake,
-    title: "Telemedicine Clinic",
-    description: "At our pharmacy, we’re dedicated to providing you with not just medications, but with telemedicine services tailored to your individual needs",
-    color: "from-orange-400/15 to-orange-400/5",
-    accentColor: "text-orange-600",
-    badge: "Expert Care",
   },
 ]
 

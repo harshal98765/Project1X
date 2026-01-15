@@ -10,62 +10,59 @@ export default function HeroSection() {
   const [error, setError] = useState("")
   const [loading, setLoading] = useState(false)
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setError("")
-    setSubmitted(false)
+ const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault()
+  setError("")
+  setSubmitted(false)
 
-    const rxList = rxNumber
-      .toUpperCase()
-      .split(/[\s,]+/)
-      .map((rx) => rx.trim())
-      .filter(Boolean)
+  const rxList = rxNumber
+    .split(/[\s,]+/)
+    .map((rx) => rx.trim())
+    .filter(Boolean)
 
-    if (rxList.length === 0) {
-      setError("Please enter at least one RX number")
-      return
-    }
-
-    const rxRegex = /^[A-Z0-9]{6,12}$/
-    const invalidRx = rxList.find((rx) => !rxRegex.test(rx))
-
-    if (invalidRx) {
-      setError("Each RX must be 6–12 characters long and contain only letters and numbers")
-      return
-    }
-
-    try {
-      setLoading(true)
-
-      const response = await fetch("https://rxflow-backend-1.onrender.com/api/mail/rx", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          rxNumbers: rxList,
-        }),
-      })
-
-      const data = await response.json()
-
-      if (!response.ok || !data.success) {
-        throw new Error(data.message || "Something went wrong")
-      }
-
-      setSubmitted(true)
-      setRxNumber("")
-
-      setTimeout(() => {
-        setSubmitted(false)
-      }, 5000)
-    } catch (err: any) {
-      console.error("RX API Error:", err)
-      setError(err.message || "Failed to submit RX numbers. Please try again.")
-    } finally {
-      setLoading(false)
-    }
+  if (rxList.length === 0) {
+    setError("Please enter at least one RX number")
+    return
   }
+
+  try {
+    setLoading(true)
+
+    const response = await fetch("https://rxflow-backend.onrender.com/api/mail/rx", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        rxNumbers: rxList,
+      }),
+    })
+
+    const data = await response.json()
+
+    console.log("RX API STATUS:", response.status)
+    console.log("RX API RESPONSE:", data)
+
+    if (!response.ok) {
+      throw new Error(data?.message || "Server error. Please try again.")
+    }
+
+    // SUCCESS
+    setSubmitted(true)
+    setRxNumber("")
+
+    setTimeout(() => {
+      setSubmitted(false)
+    }, 5000)
+
+  } catch (err: any) {
+    console.error("RX API Error:", err)
+    setError(err?.message || "Failed to submit RX numbers. Please try again.")
+  } finally {
+    setLoading(false)
+  }
+}
+
 
   return (
     <section
@@ -118,7 +115,7 @@ export default function HeroSection() {
                     </label>
                     <input
                       type="text"
-                      value="eg:  483920, 592011"
+                      value="eg: 483920, 592011"
                       readOnly
                       className="w-full px-6 py-5 text-lg font-semibold text-center border-2 border-border bg-muted rounded-2xl tracking-wider text-muted-foreground"
                     />
@@ -135,7 +132,7 @@ export default function HeroSection() {
                         setRxNumber(e.target.value)
                         setError("")
                       }}
-                      placeholder="12345678, RX982341, RX23566985"
+                      placeholder="12345678, RX982341"
                       className="w-full px-6 py-5 text-1xl font-bold tracking-widest text-center border-2 border-border bg-input rounded-2xl focus:outline-none focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all duration-300 placeholder:text-muted-foreground/30"
                     />
 
@@ -151,7 +148,7 @@ export default function HeroSection() {
                     disabled={loading}
                     className="w-full bg-gradient-to-r from-primary to-primary/90 text-primary-foreground font-bold py-5 px-6 rounded-2xl hover:shadow-lg hover:-translate-y-1 active:translate-y-0 transition-all duration-300 text-lg disabled:opacity-60 disabled:cursor-not-allowed"
                   >
-                    {loading ? "Submitting..." : "Submit RX Number"}
+                    {loading ? "Submitting..." : "Request a Refill"}
                   </button>
 
                   <div className="pt-6 border-t border-border space-y-2">

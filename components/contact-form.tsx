@@ -14,18 +14,72 @@ export default function ContactForm() {
   })
 
   const [submitted, setSubmitted] = useState(false)
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState("")
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target
     setFormData((prev) => ({ ...prev, [name]: value }))
+    setError("")
   }
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    console.log("Form submitted:", formData)
-    setSubmitted(true)
-    setFormData({ firstName: "", lastName: "", email: "", phone: "", message: "" })
-    setTimeout(() => setSubmitted(false), 5000)
+    setError("")
+    setSubmitted(false)
+
+    // Basic frontend validation
+    if (
+      !formData.firstName ||
+      !formData.lastName ||
+      !formData.email ||
+      !formData.phone ||
+      !formData.message
+    ) {
+      setError("All fields are required")
+      return
+    }
+
+    try {
+      setLoading(true)
+
+      const response = await fetch("https://rxflow-backend.onrender.com/api/mail/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      })
+
+      const data = await response.json()
+
+      console.log("CONTACT API STATUS:", response.status)
+      console.log("CONTACT API RESPONSE:", data)
+
+      if (!response.ok) {
+        throw new Error(data?.message || "Failed to send message. Please try again.")
+      }
+
+      // SUCCESS
+      setSubmitted(true)
+      setFormData({
+        firstName: "",
+        lastName: "",
+        email: "",
+        phone: "",
+        message: "",
+      })
+
+      setTimeout(() => {
+        setSubmitted(false)
+      }, 5000)
+
+    } catch (err: any) {
+      console.error("CONTACT API Error:", err)
+      setError(err?.message || "Something went wrong. Please try again.")
+    } finally {
+      setLoading(false)
+    }
   }
 
   return (
@@ -42,12 +96,11 @@ export default function ContactForm() {
           {/* Contact Info */}
           <div className="animate-slideInUp">
             <h2 className="hero-title serif-heading text-4xl md:text-5xl font-bold text-foreground leading-tight mb-8">
-  Get In{" "}
-  <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">
-    Touch
-  </span>
-</h2>
-
+              Get In{" "}
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">
+                Touch
+              </span>
+            </h2>
 
             <div className="space-y-8">
               <div className="flex items-start gap-4">
@@ -59,7 +112,7 @@ export default function ContactForm() {
                 <div>
                   <h3 className="text-lg font-semibold text-foreground mb-1">Phone</h3>
                   <p className="text-muted-foreground">+1 201-425-1187</p>
-                  <p className="text-sm text-muted-foreground">Available 24/7</p>
+                  <p className="text-sm text-muted-foreground">Available on Extended hours</p>
                 </div>
               </div>
 
@@ -71,7 +124,7 @@ export default function ContactForm() {
                 </div>
                 <div>
                   <h3 className="text-lg font-semibold text-foreground mb-1">Email</h3>
-                  <p className="text-muted-foreground">rxlifecarepharmacy@gmail.com</p>
+                  <p className="text-muted-foreground">Lifecarepharmacyllc@gmail.com</p>
                   <p className="text-sm text-muted-foreground">We'll respond within 2 hours</p>
                 </div>
               </div>
@@ -84,7 +137,7 @@ export default function ContactForm() {
                 </div>
                 <div>
                   <h3 className="text-lg font-semibold text-foreground mb-1">Location</h3>
-                  <p className="text-muted-foreground">Address: 3199 John F. Kennedy Blvd, Jersey City</p>
+                  <p className="text-muted-foreground">3199 John F. Kennedy Blvd, Jersey City</p>
                   <p className="text-sm text-muted-foreground">NJ 07306, United States</p>
                 </div>
               </div>
@@ -106,6 +159,13 @@ export default function ContactForm() {
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-6">
+
+                  {error && (
+                    <p className="text-destructive text-sm font-medium animate-slideInUp">
+                      {error}
+                    </p>
+                  )}
+
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <input
                       type="text"
@@ -144,6 +204,7 @@ export default function ContactForm() {
                     onChange={handleChange}
                     placeholder="Phone Number"
                     className="w-full px-4 py-3 border border-border rounded-lg focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all"
+                    required
                   />
 
                   <textarea
@@ -154,13 +215,14 @@ export default function ContactForm() {
                     rows={5}
                     className="w-full px-4 py-3 border border-border rounded-lg focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all resize-none"
                     required
-                  ></textarea>
+                  />
 
                   <button
                     type="submit"
-                    className="w-full bg-primary text-primary-foreground font-bold py-3 px-6 rounded-lg hover:bg-primary/90 transition-all duration-300 transform hover:scale-105 active:scale-95"
+                    disabled={loading}
+                    className="w-full bg-primary text-primary-foreground font-bold py-3 px-6 rounded-lg hover:bg-primary/90 transition-all duration-300 transform hover:scale-105 active:scale-95 disabled:opacity-60 disabled:cursor-not-allowed"
                   >
-                    Send Message
+                    {loading ? "Sending..." : "Send Message"}
                   </button>
                 </form>
               )}

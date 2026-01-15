@@ -3,7 +3,7 @@ import type { Metadata } from "next"
 import { Geist, Geist_Mono, Playfair_Display } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 import "./globals.css"
-
+import FloatingCallButton from "@/components/FloatingCallButton"
 import Navigation from "@/components/navigation"
 import Footer from "@/components/footer"
 
@@ -46,6 +46,7 @@ export default function RootLayout({
         <Footer />
 
         <Analytics />
+        <FloatingCallButton />
       </body>
     </html>
   )

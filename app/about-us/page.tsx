@@ -40,31 +40,33 @@ function HeroSection() {
   }, [])
 
   return (
-    <section className="relative h-96 w-full overflow-hidden">
+    <section className="relative h-64 sm:h-72 md:h-[420px] w-full overflow-hidden">
+
       {/* Background image with overlay */}
       <div className="absolute inset-0">
-        <Image
-          src="/1.jpg"
-          alt="About Us Hero"
-          fill
-          className="object-cover"
-          priority
-        />
-        <div className="absolute inset-0 bg-gradient-to-r from-black/60 to-black/40" />
+        <Image src="/1.jpg" alt="About Us Hero" fill className="object-cover" priority />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-black/30" />
       </div>
 
       {/* Content */}
       <div
-        className={`relative flex items-center justify-start h-full px-8 md:px-16 transition-all duration-1000 ${
+        className={`relative flex items-center h-full px-6 md:px-16 transition-all duration-1000 ${
           isLoaded ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-12"
         }`}
       >
-        <h1 className="hero-title serif-heading leading-tight text-balance">
-          <span className="text-white">About </span>
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">
-            Us
-          </span>
-        </h1>
+        <h1
+  className="
+    font-extrabold tracking-tight leading-tight
+    text-white
+    text-4xl sm:text-5xl md:text-5xl lg:text-6xl xl:text-7xl
+  "
+>
+  About{" "}
+  <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-green-300">
+    Us
+  </span>
+</h1>
+
       </div>
     </section>
   )
@@ -233,12 +235,7 @@ function BestAmongSection() {
             }`}
           >
             <div className="relative h-96">
-              <Image
-                src="/3.gif"
-                alt="Best Among Others"
-                fill
-                className="object-cover rounded-xl shadow-lg"
-              />
+              <Image src="/3.gif" alt="Best Among Others" fill className="object-cover rounded-xl shadow-lg" />
             </div>
           </div>
         </div>
@@ -305,7 +302,6 @@ function PharmacistSection() {
 export default function AboutPage() {
   return (
     <main className="relative w-full overflow-hidden">
-
       {/* Gradient Background */}
       <div className="absolute inset-0 bg-gradient-to-r from-green-50/90 via-green-50/80 to-green-50/70" />
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-emerald-100/20 to-emerald-200/40" />
@@ -318,7 +314,6 @@ export default function AboutPage() {
         <BestAmongSection />
         <PharmacistSection />
       </div>
-
     </main>
   )
 }

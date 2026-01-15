@@ -1,10 +1,11 @@
 "use client"
+
 import { Phone } from "lucide-react"
 
 export default function FloatingCallButton() {
   return (
     <a
-      href="tel:+1 201-425-1187"
+      href="tel:+12014251187"
       aria-label="Call Us"
       className="
         fixed z-50 group
@@ -37,8 +38,8 @@ export default function FloatingCallButton() {
           group-hover:scale-105 group-hover:shadow-lg
         "
       >
-        {/* Subtle pulse – desktop only */}
-        <span className="hidden md:block absolute inset-0 rounded-xl bg-[#2f4f2f] dark:bg-[#3b6b3b] opacity-20 animate-ping" />
+        {/* Pulse – now works on mobile too */}
+        <span className="absolute inset-0 rounded-xl bg-[#2f4f2f] dark:bg-[#3b6b3b] opacity-30 animate-ping" />
 
         <Phone
           className="

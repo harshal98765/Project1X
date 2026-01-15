@@ -46,7 +46,7 @@ export default function MapsSection() {
                   <Navigation className="w-5 h-5 text-primary" />
                 </div>
                 <p className="font-semibold text-foreground text-lg">
-                  Real-time location tracking for Rx delivery
+                  Real-time location tracking for Rx delivery on call basis only
                 </p>
               </div>
 
@@ -55,7 +55,7 @@ export default function MapsSection() {
                   <MapPin className="w-5 h-5 text-secondary" />
                 </div>
                 <p className="font-semibold text-foreground text-lg">
-                  Integrated pharmacy network map
+                  New Jersey, New York, Pennsylvania
                 </p>
               </div>
 
@@ -79,12 +79,7 @@ export default function MapsSection() {
               </button>
             </div>
 
-            <div className="pt-8">
-              <div className="inline-block bg-white rounded-2xl px-6 py-4 border border-border/50 shadow-lg">
-                <p className="text-3xl font-bold serif-heading text-primary">1</p>
-                <p className="text-sm text-muted-foreground font-medium">Primary Location</p>
-              </div>
-            </div>
+            
           </div>
 
           {/* RIGHT MAP */}
