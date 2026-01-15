@@ -8,7 +8,7 @@ const navItems = [
   { label: "Home", href: "/" },
   { label: "About Us", href: "/about-us" },
   { label: "Telemedicine Clinic", href: "/telemedicine" },
-  { label: "Services", href: "/allservice" },
+  { label: "Services", href: "/ALLservice" },
   { label: "Contact Us", href: "/#contact" }
 ]
 
