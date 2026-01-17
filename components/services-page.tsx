@@ -5,9 +5,9 @@ export default function WhatWeOfferSection() {
   const offers = [
     {
       image: "/medicine01.png",
-      title: "Vitamins & Supplements",
+      title: "Precision Compounding",
       description:
-        "Unlock the power of optimal health with our carefully curated selection of vitamins and supplements, meticulously crafted to support your well-being",
+        "Personalized medications prepared to meet your unique needs, including customized dosages, and allergen-free formulations for better health outcomes.",
     },
     {
       image: "/checkup01.png",
