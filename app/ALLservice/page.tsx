@@ -1,265 +1,114 @@
 import React, { ReactNode } from "react";
 import Image from "next/image";
-import { 
-  FlaskConical, 
-  ShieldCheck, 
-  Syringe, 
-  Stethoscope, 
-  Pill, 
-  PackageCheck 
-} from "lucide-react";
-import service1 from './service1.jpg';
-import service2 from './service2.jpg';
 import service3 from './service3.jpg';
 
-interface ServiceCardProps {
-  title: string;
-  text: string;
-  icon: ReactNode;
-}
-
-const ServiceCard = ({ title, text, icon }: ServiceCardProps) => (
-  <div className="rounded-2xl bg-white p-6 border border-[#003c3f]-200 transition-all duration-300 hover:-translate-y-2 hover:shadow-xl hover:border-[#003c3f]-300 group">
-    <div className="mb-4 w-12 h-12 rounded-lg bg-blue-50 flex items-center justify-center text-[#003c3f] group-hover:bg-[#003c3f] group-hover:text-white transition-colors duration-300">
-      {icon}
-    </div>
-    <h3 className="text-xl font-semibold text-[#003c3f] mb-3">{title}</h3>
-    <p className="text-[#003c3f]">{text}</p>
-  </div>
-);
 
 export default function ServicesPage() {
-  const services: ServiceCardProps[] = [
-    {
-      title: "Vitamins & Supplements",
-      text: "Carefully curated vitamins and supplements to support your overall well-being.",
-      icon: <FlaskConical size={24} />,
-    },
-    {
-      title: "Generic Plan",
-      text: "Affordable, high-quality generic prescription plans without compromise.",
-      icon: <ShieldCheck size={24} />,
-    },
-    {
-      title: "Vaccinations",
-      text: "Protection against preventable diseases for you and your loved ones.",
-      icon: <Syringe size={24} />,
-    },
-    {
-      title: "Medical Supplies & More",
-      text: "Essential medical supplies to elevate your healthcare experience.",
-      icon: <Stethoscope size={24} />,
-    },
-    {
-      title: "Compounding",
-      text: "Customized medications tailored to your unique health needs.",
-      icon: <Pill size={24} />,
-    },
-    {
-      title: "PakMyMeds",
-      text: "Smart medication packaging to ensure you never miss a dose.",
-      icon: <PackageCheck size={24} />,
-    },
-  ];
 
   return (
-    <main className="px-6 md:px-12 py-20 space-y-28 bg-white">
-      {/* HERO SECTION */}
-      <section className="text-center max-w-4xl mx-auto space-y-6">
-        <h1 className="text-4xl md:text-5xl font-bold text-[#003c3f]">
-          Our Services
-        </h1>
+  <div className="bg-white font-sans text-slate-800">
+    {/* --- Hero Section --- */}
+    <section className="bg-gradient-to-b from-green-50 to-white py-16 px-6 text-center">
+      <h1 className="text-4xl md:text-5xl font-bold text-green-800 mb-4">Our Services</h1>
+      <p className="text-lg text-slate-600 max-w-2xl mx-auto">
+        Dedicated to providing comprehensive, patient-focused care with a commitment to excellence.
+      </p>
+    </section>
 
-        <p className="text-lg text-text-[#003c3f] leading-relaxed">
-          A dependable, easily accessible, and community-oriented retail pharmacy is what everyone seeks.
-          LifeCare Pharmacy delivers personalized, affordable, and solution-oriented care beyond prescriptions.
-        </p>
-      </section>
-
-      {/* CORE SERVICES GRID */}
-      <section className="max-w-7xl mx-auto">
-        <h2 className="text-3xl font-semibold text-center text-[#003c3f] mb-12">
-          What We Offer
-        </h2>
-
-        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-          {services.map((service, index) => (
-            <ServiceCard key={index} {...service} />
-          ))}
+    <div className="max-w-6xl mx-auto px-6 space-y-20 pb-20">
+      
+      {/* --- Full-Service Pharmacy Section --- */}
+      <section className="grid md:grid-cols-2 gap-12 items-center">
+        <div>
+          <span className="text-green-600 font-semibold tracking-wide uppercase text-sm">Comprehensive Care</span>
+          <h2 className="text-3xl font-bold mt-2 mb-6">Full-Service Pharmacy</h2>
+          <p className="text-slate-600 mb-6">
+            At Life Care Pharmacy, we go beyond standard prescriptions to provide holistic health support.
+          </p>
+          <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            {[
+              "Prescription fulfillment", "Compounding services", "Specialty medications",
+              "Workers’ comp & Auto", "Vaccinations", "Pain management",
+              "Diabetes care", "Mental health", "Women’s health"
+            ].map((item) => (
+              <li key={item} className="flex items-center space-x-2 text-slate-700">
+                <span className="h-2 w-2 bg-green-500 rounded-full" />
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
         </div>
-      </section>
+        <div className="bg-green-100 rounded-2xl min-w-[200px] h-5/6 flex items-center justify-center border-2 border-green-50">
 
-      {/* COVID VACCINE EXPERT */}
-      <section id="covid-vaccine-expert" className="max-w-6xl mx-auto space-y-8">
-        <h2 className="text-3xl font-semibold text-[#003c3f] border-l-4 border-[#003c3f] pl-4">
-          Covid Vaccine Expert
-        </h2>
+           <Image src={service3} alt="Full-Service Pharmacy" className="rounded-2xl object-cover h-full w-full" />
+        </div>    </section>
 
-        <p className="text-lg text-[#003c3f]">
-          Your trusted destination for expert COVID-19 vaccination services in New Jersey.
-        </p>
-
-        <div className="grid md:grid-cols-2 gap-8">
-          <div className=" bg-gradient-to-br from-sky-100 to-emerald-50 rounded-2xl p-6 border border-[#003c3f]-50 transition hover:shadow-lg">
-            <h4 className="text-xl font-semibold text-[#003c3f] mb-4">
-              Why Choose Life Care Pharmacy?
-            </h4>
-                                                    
-            <ul className="list-disc list-inside space-y-2 text-[#003c3f] marker:text-[#003c3f]">
-              <li>Expert and up-to-date vaccine guidance</li>
-              <li>Personalized health consultations</li>
-              <li>Convenient New Jersey location</li>
-              <li>Multiple vaccine options available</li>
+      {/* --- Compounding Medications Section (Cards Style) --- */}
+      <section>
+        <div className="text-center mb-12">
+          <h2 className="text-3xl font-bold text-slate-900">Compounding Medications</h2>
+          <p className="text-slate-600 mt-4 max-w-3xl mx-auto">
+            We offer custom solutions tailored to meet the unique needs of each patient using high-quality ingredients and strict quality standards.
+          </p>
+        </div>
+        
+        <div className="grid md:grid-cols-3 gap-6">
+          <div className="p-6 border border-slate-100 rounded-xl bg-slate-50 hover:shadow-md transition-shadow">
+            <h3 className="font-bold text-green-700 mb-3">Custom Formulations</h3>
+            <ul className="text-sm space-y-2 text-slate-600">
+              <li>• Hard-to-find strengths</li>
+              <li>• Customized creams & gels</li>
+              <li>• Oral liquids & capsules</li>
             </ul>
           </div>
-
-          <div className="bg-white text-[#003c3f] rounded-2xl  p-6 pt-14 transition-all duration-300 hover:scale-[1.02] shadow-md">
-            <h4 className="text-xl font-semibold mb-3">Get Started</h4>
-            <p className="opacity-90 leading-relaxed">
-              Visit lifecarepharmacyrx.com or call{" "}
-              <span className="font-bold underline">+1 201-425-1187</span> to
-              schedule your vaccination.
-            </p>
+          <div className="p-6 border border-slate-100 rounded-xl bg-slate-50 hover:shadow-md transition-shadow">
+            <h3 className="font-bold text-green-700 mb-3">Specialty Forms</h3>
+            <ul className="text-sm space-y-2 text-slate-600">
+              <li>• Suppositories</li>
+              <li>• Specialty dosage forms</li>
+              <li>• Allergy-friendly (dye-free)</li>
+            </ul>
+          </div>
+          <div className="p-6 border border-slate-100 rounded-xl bg-slate-50 hover:shadow-md transition-shadow">
+            <h3 className="font-bold text-green-700 mb-3">Veterinary Care</h3>
+            <ul className="text-sm space-y-2 text-slate-600">
+              <li>• Compounding for pets</li>
+              <li>• Flavoring adjustments</li>
+              <li>• Custom animal dosages</li>
+            </ul>
           </div>
         </div>
       </section>
 
-      {/* DISCOUNT MEDICATIONS */}
-      <section id="discount-medications" className="max-w-6xl mx-auto space-y-8">
-        <h2 className="text-3xl font-semibold text-[#003c3f] border-l-4 border-[#003c3f] pl-4">
-          Discount Medications
-        </h2>
-
-        <p className="text-lg text-[#003c3f]">
-          Affordable healthcare solutions without compromising quality.
-        </p>
-
-        <div className="grid md:grid-cols-2 gap-8">
-          <div>
-            <Image
-              src={service2}
-              alt="Discount Medications"
-              width={500}
-              height={400}
-              className="rounded-2xl shadow-lg w-full h-auto"
-            />
-          </div>
-
-          <div className="grid gap-6">
+      {/* --- Specialty Medications Section --- */}
+      <section className="bg-green-800 rounded-3xl p-8 md:p-12 text-white overflow-hidden relative">
+        <div className="relative z-10">
+          <h2 className="text-3xl font-bold mb-4">Specialty Medications</h2>
+          <p className="text-green-100 mb-8 max-w-5xl">
+            We specialize in medications for complex, chronic, and high-cost conditions, providing 
+            ongoing support throughout your entire therapy.
+          </p>
+          
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {[
-
-              "Competitive pricing on prescriptions",
-
-              "Wide range of generic & brand medications",
-
-              "Expert pharmacist guidance",
-
-            ].map((item, index) => (
-
-              <div
-
-                key={index}
-
-                className="flex justify-center items-center bg-white rounded-xl p-6 border border-[#003c3f]-200
-
-                           transition-all duration-300 hover:scale-105 hover:shadow-lg"
-
-              >
-
-                <p className="text-[#003c3f]">{item}</p>
-
+              "Autoimmune Conditions", "Hormone Therapy", "Chronic Pain",
+              "Metabolic Disorders", "Mental Health", "Specialty Injectables"
+            ].map((spec) => (
+              <div key={spec} className="bg-green-700/50 flex justify-center items-center backdrop-blur-sm border border-green-600 p-4 rounded-lg">
+                <p className="font-medium text-white">{spec}</p>
               </div>
-
             ))}
           </div>
+          
+          <p className="mt-8 text-sm text-green-200 italic">
+            * We work closely with prescribers and insurance providers to ensure smooth coordination.
+          </p>
         </div>
+        {/* Decorative Circle */}
+        <div className="absolute -bottom-10 -right-10 w-64 h-64 bg-green-700 rounded-full opacity-50" />
       </section>
 
-      {/* MEDICATION COUNSELING */}
-      <section id="medication-counseling" className="max-w-6xl mx-auto space-y-8">
-        <h2 className="text-3xl font-semibold text-[#003c3f] border-l-4 border-[#003c3f] pl-4">
-          Medication Counseling
-        </h2>
-
-        <p className="text-lg text-[#003c3f]">
-          Personalized guidance from experienced pharmacists to help you manage medications effectively.
-        </p>
-
-        <div className="grid md:grid-cols-2 gap-8">
-          {/* Left Side - Services Card */}
-          <div className="bg-gradient-to-br from-blue-50 to-emerald-50 rounded-2xl p-8 border border-[#003c3f]-100 shadow-md h-fit">
-            <h4 className="text-xl font-semibold text-[#003c3f] mb-6">Our Services</h4>
-            <ul className="space-y-4">
-              {[
-                "One-on-one consultations",
-                "Dosage & side-effect education",
-                "Drug interaction awareness",
-                "Accessible support anytime",
-              ].map((bullet, i) => (
-                <li key={i} className="flex items-center space-x-3">
-                  <span className="text-lg text-[#003c3f]">✓</span>
-                  <span className="text-[#003c3f]">{bullet}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Right Side - Two Images Side by Side */}
-          <div className="grid grid-cols-2 gap-4">
-            <Image
-              src={service3}
-              alt="Medication Counseling - Pharmacist"
-              width={400}
-              height={300}
-              className="rounded-2xl shadow-lg w-full h-auto"
-            />
-            <Image
-              src={service1}
-              alt="Medication Counseling - Patient Education"
-              width={400}
-              height={300}
-              className="rounded-2xl shadow-lg w-full h-auto"
-            />
-          </div>
-        </div>
-      </section>
-
-      {/* VACCINATION CONSULTATION */}
-      <section id="vaccination-consultation" className="max-w-6xl mx-auto space-y-8">
-        <h2 className="text-3xl font-semibold text-[#003c3f] border-l-4 border-[#003c3f] pl-4">
-          Vaccination Consultation
-        </h2>
-
-        <p className="text-lg text-[#003c3f]">
-          Comprehensive vaccination consultations tailored to your health profile.
-        </p>
-
-        <div className="grid md:grid-cols-2 gap-8">
-          <div className="rounded-3xl p-8 bg-gradient-to-br from-sky-100 to-emerald-50 duration-500 hover:shadow-2xl">
-            <h4 className="text-xl font-semibold text-[#003c3f] mb-3">
-              What We Provide
-            </h4>
-
-            <ul className="list-disc list-inside space-y-2 text-[#003c3f]">
-              <li>Expert immunization guidance</li>
-              <li>Personalized recommendations</li>
-              <li>Vaccine education & awareness</li>
-            </ul>
-          </div>
-
-          <div className="bg-white text-[#003c3f] rounded-2xl p-6 transition-all duration-300 hover:scale-[1.02] shadow-md flex flex-col justify-center">
-            <h4 className="text-xl font-semibold mb-3">
-              Book Your Consultation
-            </h4>
-
-            <p className="opacity-90 leading-relaxed">
-              Visit lifecarepharmacyrx.com or call{" "}
-              <span className="font-bold underline">+1 201-425-1187</span> to
-              schedule today.
-            </p>
-          </div>
-        </div>
-      </section>
-    </main>
-  );
+    </div>
+  </div>
+);
 }
