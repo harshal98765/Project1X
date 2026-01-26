@@ -17,9 +17,9 @@ export default function WhatWeOfferSection() {
     },
     {
       image: "/vaccin01.png",
-      title: "Vaccinations",
+      title: "Care Support",
       description:
-        "Shield yourself and your loved ones from preventable diseases with our trusted vaccinations, providing a strong defense against illness, promoting a healthier future",
+        "Ongoing support for managing chronic conditions like diabetes, blood pressure, and thyroid issues with tailored medication plans.",
     },
   ]
 
