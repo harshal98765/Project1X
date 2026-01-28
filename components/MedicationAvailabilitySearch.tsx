@@ -182,12 +182,21 @@ export default function MedicationAvailabilitySearch() {
 
             <div className="flex justify-center pt-2">
               <a
-                href="tel:2014251187"
-                className="bg-green-600 hover:bg-green-700 text-white px-8 py-4 rounded-xl font-bold text-lg flex items-center gap-3 transition-colors duration-200 shadow-lg"
-              >
-                <Phone className="w-6 h-6" />
-                Call Pharmacy: (201) 425-1187
-              </a>
+  href="tel:2014251187"
+  className="
+    bg-green-600 hover:bg-green-700 text-white
+    px-5 py-2.5 md:px-8 md:py-4
+    rounded-lg md:rounded-xl
+    font-semibold md:font-bold
+    text-sm md:text-lg
+    flex items-center gap-2 md:gap-3
+    transition-colors duration-200 shadow-lg
+  "
+>
+  <Phone className="w-4 h-4 md:w-6 md:h-6" />
+  Call Pharmacy: (201) 425-1187
+</a>
+
             </div>
 
             <div className="text-sm text-center text-slate-500 space-y-1 pt-4 border-t border-slate-200">
@@ -218,94 +227,111 @@ export default function MedicationAvailabilitySearch() {
                 </p>
               </div>
 
-              <form
-                onSubmit={(e) => {
-                  e.preventDefault()
-                  setShowModal(false)
-                  setSubmitted(true)
-                }}
-                className="space-y-4"
-              >
-                {/* Name Fields */}
-                <div className="grid grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-sm font-semibold text-slate-700 mb-2">
-                      First Name
-                    </label>
-                    <input 
-                      required 
-                      placeholder="John" 
-                      className="w-full px-4 py-3 border-2 border-slate-200 rounded-lg focus:border-green-500 focus:ring-4 focus:ring-green-100 outline-none transition-all text-base"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-semibold text-slate-700 mb-2">
-                      Last Name
-                    </label>
-                    <input 
-                      required 
-                      placeholder="Doe" 
-                      className="w-full px-4 py-3 border-2 border-slate-200 rounded-lg focus:border-green-500 focus:ring-4 focus:ring-green-100 outline-none transition-all text-base"
-                    />
-                  </div>
-                </div>
+             <form
+  onSubmit={(e) => {
+    e.preventDefault()
+    setShowModal(false)
+    setSubmitted(true)
+  }}
+  className="space-y-3 md:space-y-4"
+>
 
-                {/* Date Field */}
-                <div>
-                  <label className="block text-sm font-semibold text-slate-700 mb-2">
-                    Date of Birth
-                  </label>
-                  <input 
-                    type="date" 
-                    required 
-                    className="w-full px-4 py-3 border-2 border-slate-200 rounded-lg focus:border-green-500 focus:ring-4 focus:ring-green-100 outline-none transition-all text-base"
-                  />
-                </div>
+  {/* Name Fields */}
+  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-4">
+    <div>
+      <label className="block text-xs md:text-sm font-semibold text-slate-700 mb-1.5 md:mb-2">
+        First Name
+      </label>
+      <input
+        required
+        placeholder="John"
+        className="w-full px-3 py-2.5 md:px-4 md:py-3 border-2 border-slate-200 rounded-lg
+                   focus:border-green-500 focus:ring-4 focus:ring-green-100
+                   outline-none transition-all text-sm md:text-base"
+      />
+    </div>
 
-                {/* Phone Field */}
-                <div>
-                  <label className="block text-sm font-semibold text-slate-700 mb-2">
-                    Phone Number
-                  </label>
-                  <input 
-                    placeholder="(201) 425-1187" 
-                    required 
-                    className="w-full px-4 py-3 border-2 border-slate-200 rounded-lg focus:border-green-500 focus:ring-4 focus:ring-green-100 outline-none transition-all text-base"
-                  />
-                </div>
+    <div>
+      <label className="block text-xs md:text-sm font-semibold text-slate-700 mb-1.5 md:mb-2">
+        Last Name
+      </label>
+      <input
+        required
+        placeholder="Doe"
+        className="w-full px-3 py-2.5 md:px-4 md:py-3 border-2 border-slate-200 rounded-lg
+                   focus:border-green-500 focus:ring-4 focus:ring-green-100
+                   outline-none transition-all text-sm md:text-base"
+      />
+    </div>
+  </div>
 
-                {/* Email Field */}
-                <div>
-                  <label className="block text-sm font-semibold text-slate-700 mb-2">
-                    Email Address
-                  </label>
-                  <input 
-                    type="email"
-                    placeholder="john@example.com" 
-                    className="w-full px-4 py-3 border-2 border-slate-200 rounded-lg focus:border-green-500 focus:ring-4 focus:ring-green-100 outline-none transition-all text-base"
-                  />
-                </div>
+  {/* Date Field */}
+  <div>
+    <label className="block text-xs md:text-sm font-semibold text-slate-700 mb-1.5 md:mb-2">
+      Date of Birth
+    </label>
+    <input
+      type="date"
+      required
+      className="w-full px-3 py-2.5 md:px-4 md:py-3 border-2 border-slate-200 rounded-lg
+                 focus:border-green-500 focus:ring-4 focus:ring-green-100
+                 outline-none transition-all text-sm md:text-base"
+    />
+  </div>
 
-                {/* Consent Checkbox */}
-                <label className="flex gap-3 text-sm text-slate-700 p-4 bg-green-50 rounded-lg cursor-pointer hover:bg-green-100 transition-colors">
-                  <input 
-                    type="checkbox" 
-                    required 
-                    className="w-5 h-5 text-green-600 rounded accent-green-600 cursor-pointer flex-shrink-0 mt-0.5"
-                  />
-                  <span>
-                    I authorize Life Care Pharmacy to contact me regarding this medication request.
-                  </span>
-                </label>
+  {/* Phone Field */}
+  <div>
+    <label className="block text-xs md:text-sm font-semibold text-slate-700 mb-1.5 md:mb-2">
+      Phone Number
+    </label>
+    <input
+      placeholder="(201) 425-1187"
+      required
+      className="w-full px-3 py-2.5 md:px-4 md:py-3 border-2 border-slate-200 rounded-lg
+                 focus:border-green-500 focus:ring-4 focus:ring-green-100
+                 outline-none transition-all text-sm md:text-base"
+    />
+  </div>
 
-                {/* Submit Button */}
-                <button
-                  type="submit"
-                  className="w-full bg-green-600 hover:bg-green-700 text-white py-4 rounded-xl font-bold text-lg transition-colors duration-200 shadow-lg mt-6"
-                >
-                  Check Availability
-                </button>
-              </form>
+  {/* Email Field */}
+  <div>
+    <label className="block text-xs md:text-sm font-semibold text-slate-700 mb-1.5 md:mb-2">
+      Email Address
+    </label>
+    <input
+      type="email"
+      placeholder="john@example.com"
+      className="w-full px-3 py-2.5 md:px-4 md:py-3 border-2 border-slate-200 rounded-lg
+                 focus:border-green-500 focus:ring-4 focus:ring-green-100
+                 outline-none transition-all text-sm md:text-base"
+    />
+  </div>
+
+  {/* Consent Checkbox */}
+  <label className="flex gap-3 text-xs md:text-sm text-slate-700 p-3 md:p-4 bg-green-50 rounded-lg cursor-pointer hover:bg-green-100 transition-colors">
+    <input
+      type="checkbox"
+      required
+      className="w-4 h-4 md:w-5 md:h-5 text-green-600 rounded accent-green-600 cursor-pointer flex-shrink-0 mt-0.5"
+    />
+    <span>
+      I authorize Life Care Pharmacy to contact me regarding this medication request.
+    </span>
+  </label>
+
+  {/* Submit Button */}
+  <button
+    type="submit"
+    className="w-full bg-green-600 hover:bg-green-700 text-white
+               py-3 md:py-4 rounded-xl font-bold
+               text-base md:text-lg
+               transition-colors duration-200 shadow-lg mt-4 md:mt-6"
+  >
+    Check Availability
+  </button>
+
+</form>
+
             </div>
           </div>
         )}
