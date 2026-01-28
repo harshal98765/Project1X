@@ -99,7 +99,7 @@ export default function MedicationAvailabilitySearch() {
             <div className="absolute z-30 bg-white w-full mt-2 rounded-2xl border-2 border-green-200 shadow-xl max-h-80 overflow-y-auto">
               {filtered.map((med, idx) => (
                 <button
-                  key={med}
+                  key={`${med}-${idx}`}
                   onClick={() => selectMedication(med)}
                   className={`w-full text-left px-5 py-4 text-base font-medium hover:bg-green-100 transition-colors duration-150 ${
                     idx !== filtered.length - 1 ? 'border-b border-green-100' : ''

@@ -98,7 +98,6 @@ export default function ContactForm() {
             </h2>
 
             <div className="space-y-8">
-
               {/* PHONE */}
               <div className="flex items-start gap-4">
                 <div className="h-12 w-12 rounded-lg bg-primary/10 flex items-center justify-center">
