@@ -3,6 +3,8 @@
 import { useState } from "react"
 import Link from "next/link"
 import { Menu, X, Phone } from "lucide-react"
+import Image from "next/image"
+
 
 const navItems = [
   { label: "Home", href: "/" },
@@ -73,13 +75,14 @@ export default function Navigation() {
           <div className="flex justify-between items-center h-20">
 
             {/* Logo */}
-            <Link href="/">
-              <img
-                src="/logo.png"
-                alt="Life Care Pharmacy"
-                className="h-14 w-auto object-contain brightness-110 cursor-pointer"
-              />
-            </Link>
+            <Image
+  src="/logo.png"
+  alt="Life Care Pharmacy – Jersey City NJ"
+  width={220}
+  height={70}
+  priority
+/>
+
 
             {/* Desktop Nav */}
             <div className="hidden md:flex items-center gap-8">
