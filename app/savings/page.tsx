@@ -4,7 +4,104 @@ import React, { useState } from 'react'
 import { Upload, CheckCircle, DollarSign, ShieldCheck } from 'lucide-react'
 
 export default function SavingsCopayHelp() {
+  const [showTerms, setShowTerms] = useState(false)
   const [submitted, setSubmitted] = useState(false)
+  const [loading, setLoading] = useState(false)
+
+  /* =============================== */
+  /* SUBMIT TO BACKEND */
+  /* =============================== */
+
+  // const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  //   e.preventDefault()
+
+  //   const form = e.currentTarget
+  //   const formData = new FormData(form)
+
+  //   const payload = {
+  //     firstName: formData.get('firstName'),
+  //     lastName: formData.get('lastName'),
+  //     dob: formData.get('dob'),
+  //     phone: formData.get('phone'),
+
+  //     medicationName: formData.get('medicationName'),
+  //     strength: formData.get('strength'),
+
+  //     insuranceStatus: formData.get('insuranceStatus'),
+  //     expensiveElsewhere: formData.get('expensiveElsewhere'),
+
+  //     currentPharmacy: formData.get('currentPharmacy'),
+  //     approximatePrice: formData.get('approximatePrice'),
+  //     consent : formData.get('yes'),
+  //     insuranceCard: formData.get('insuranceCard'),
+
+
+  //     source: 'Life Care Pharmacy – Savings & Copay Help',
+  //   }
+
+  //   try {
+  //     setLoading(true)
+
+  //     await fetch(
+  //       'https://rxflow-backend.onrender.com/api/mail/savings-request',
+  //       {
+  //         method: 'POST',
+  //         headers: {
+  //           'Content-Type': 'application/json',
+  //         },
+  //         body: JSON.stringify(payload),
+  //       }
+  //     )
+
+  //     setSubmitted(true)
+  //   } catch (error) {
+  //     alert('Unable to submit request. Please try again.')
+  //     console.error(error)
+  //   } finally {
+  //     setLoading(false)
+  //   }
+  // }
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  e.preventDefault()
+
+  const form = e.currentTarget
+  const formData = new FormData(form)
+
+  formData.append(
+    'source',
+    'Life Care Pharmacy – Savings & Copay Help'
+  )
+
+  try {
+    setLoading(true)
+
+    const response = await fetch(
+      'https://rxflow-backend-80te.onrender.com/api/mail/savings-request',
+      {
+        method: 'POST',
+        body: formData, // ✅ multipart/form-data
+      }
+    )
+
+    if (!response.ok) {
+      throw new Error('Submission failed')
+    }
+
+    setSubmitted(true)
+  } catch (error) {
+    console.error(error)
+    alert('Unable to submit request. Please try again.')
+  } finally {
+    setLoading(false)
+  }
+}
+
+const inputStyle =
+  "w-full px-4 py-3 rounded-xl border-[1.5px] border-slate-300 bg-white " +
+  "text-slate-900 placeholder-slate-400 " +
+  "focus:outline-none focus:ring-2 focus:ring-green-300 focus:border-green-600 transition"
+
 
   return (
     <section className="min-h-screen bg-gradient-to-b from-green-50 to-white px-4 py-14 md:py-20">
@@ -43,10 +140,7 @@ export default function SavingsCopayHelp() {
 
         /* ================= FORM ================= */
         <form
-          onSubmit={(e) => {
-            e.preventDefault()
-            setSubmitted(true)
-          }}
+          onSubmit={handleSubmit}
           className="bg-white rounded-3xl shadow-2xl border-2 border-green-200 p-8 md:p-12 space-y-8"
         >
 
@@ -57,30 +151,54 @@ export default function SavingsCopayHelp() {
             </h3>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {/* ✅ FIRST NAME */}
               <input
+                name="firstName"
                 required
                 placeholder="First Name"
-                className="input"
+                className={inputStyle}
               />
 
-              {/* ✅ LAST NAME */}
               <input
+                name="lastName"
                 required
                 placeholder="Last Name"
-                className="input"
+                className={inputStyle}
               />
 
-              <input
-                required
-                type="date"
-                className="input"
-              />
+              <div className="relative max-w-[295px] sm:max-w-[220px] md:max-w-full">
+
+  {/* Mobile-only fake placeholder */}
+                <span
+                  className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 
+                            pointer-events-none text-sm 
+                            block md:hidden"
+                  id="dob-label"
+                >
+                  Date of Birth
+                </span>
+
+                <input
+                  type="date"
+                  name="dob"
+                  required
+                  onChange={(e) => {
+                    const label = document.getElementById('dob-label')
+                    if (label) label.style.display = e.target.value ? 'none' : 'block'
+                  }}
+                  className={`${inputStyle.replace(
+                    'w-full',
+                    ''
+                  )} ios-date w-[295px] sm:w-[220px] md:w-full`}
+                />
+              </div>
+
+
 
               <input
+                name="phone"
                 required
                 placeholder="Phone Number"
-                className="input"
+                className={inputStyle}
               />
             </div>
           </div>
@@ -93,15 +211,17 @@ export default function SavingsCopayHelp() {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <input
+                name="medicationName"
                 required
                 placeholder="Medication name (ex: Ozempic)"
-                className="input"
+                className={inputStyle}
               />
 
               <input
+                name="strength"
                 required
                 placeholder="Strength (ex: 0.5 mg)"
-                className="input"
+                className={inputStyle}
               />
             </div>
           </div>
@@ -118,7 +238,7 @@ export default function SavingsCopayHelp() {
                   key={opt}
                   className="flex items-center gap-3 border-2 border-slate-200 rounded-xl px-4 py-4 cursor-pointer hover:border-green-400 transition"
                 >
-                  <input type="radio" name="insurance" required />
+                  <input type="radio" name="insuranceStatus" value={opt} required />
                   <span className="font-medium text-slate-700">{opt}</span>
                 </label>
               ))}
@@ -135,15 +255,28 @@ export default function SavingsCopayHelp() {
               Was this medication expensive at another pharmacy?
             </label>
 
-            <div className="grid grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+
               {['Yes', 'No', 'Not sure'].map((opt) => (
                 <label
-                  key={opt}
-                  className="flex items-center gap-3 border-2 border-slate-200 rounded-xl px-4 py-4 cursor-pointer hover:border-green-400 transition"
-                >
-                  <input type="radio" name="expensive" required />
-                  <span>{opt}</span>
-                </label>
+  key={opt}
+  className="
+    flex items-center justify-center gap-2
+    border-2 border-slate-200 rounded-xl
+    px-4 py-4 cursor-pointer
+    hover:border-green-400 transition
+    whitespace-nowrap text-center
+  "
+>
+  <input
+    type="radio"
+    name="expensiveElsewhere"
+    value={opt}
+    required
+  />
+  <span className="font-medium">{opt}</span>
+</label>
+
               ))}
             </div>
           </div>
@@ -156,38 +289,178 @@ export default function SavingsCopayHelp() {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <input
+                name="currentPharmacy"
                 placeholder="Current pharmacy name (optional)"
-                className="input"
+                className={inputStyle}
               />
 
               <input
+                name="approximatePrice"
                 placeholder="Approximate price paid or quoted (optional)"
-                className="input"
+                className={inputStyle}
               />
             </div>
 
-            {/* Upload */}
             <label className="mt-5 flex items-center justify-center gap-3 border-2 border-dashed border-green-300 rounded-xl p-6 cursor-pointer hover:bg-green-50 transition">
               <Upload className="w-6 h-6 text-green-600" />
               <span className="text-green-700 font-medium">
                 Upload insurance card (optional)
               </span>
-              <input type="file" hidden />
+              <input type="file" name="insuranceCard" accept="image/*,.pdf" hidden />
             </label>
           </div>
 
           {/* ===== CONSENT ===== */}
-          <label className="flex gap-3 text-sm text-slate-700 bg-green-50 p-5 rounded-xl cursor-pointer">
-            <input type="checkbox" required className="mt-1 accent-green-600" />
-            I authorize Life Care Pharmacy to review available savings options when eligible.
-          </label>
+          <label className="flex gap-3 text-sm text-slate-700 bg-green-50 p-5 rounded-xl cursor-pointer leading-relaxed">
+  <input
+    type="checkbox"
+    name="consent"
+    value="true"
+    required
+    className="mt-1 accent-green-600"
+  />
+
+  <span>
+    I agree to the{" "}
+    <button
+      type="button"
+      onClick={() => setShowTerms(true)}
+      className="text-green-700 font-semibold underline hover:text-green-800"
+    >
+      Terms & Conditions
+    </button>{" "}
+    and authorize Life Care Pharmacy to contact me and process my request
+    in accordance with HIPAA and applicable pharmacy laws.
+  </span>
+</label>
+
+{showTerms && (
+  <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 px-4">
+
+    <div className="bg-white max-w-3xl w-full h-[85vh] rounded-2xl shadow-xl flex flex-col overflow-hidden">
+
+
+      {/* HEADER */}
+      <div className="flex justify-between items-center px-6 py-4 border-b">
+        <h2 className="text-xl font-bold text-green-900">
+          Life Care Pharmacy – Website Terms & Conditions
+        </h2>
+
+        <button
+          onClick={() => setShowTerms(false)}
+          className="text-slate-500 hover:text-slate-800 text-2xl"
+        >
+          ×
+        </button>
+      </div>
+
+      {/* BODY */}
+      <div className="flex-1 overflow-y-auto p-6 text-sm text-slate-700 space-y-4 leading-relaxed">
+
+
+        <p className="text-slate-500">
+          Last updated: January 29, 2026
+        </p>
+
+        <p>
+          By accessing or using this website (lifecarepharmacyrx.com),
+          you agree to the following Terms and Conditions. If you do not
+          agree, please do not use this website or submit any forms.
+        </p>
+
+        <h3 className="font-semibold text-green-900">1. General Website Use</h3>
+        <p>
+          This website is operated by:
+          <br />
+          Life Care Pharmacy LLC<br />
+          3199 John F. Kennedy Blvd<br />
+          Jersey City, NJ 07306<br />
+          Phone: 201-425-1187<br />
+          Fax: 201-210-8304
+        </p>
+
+        <h3 className="font-semibold text-green-900">2. No Medical Advice Disclaimer</h3>
+        <ul className="list-disc ml-5 space-y-1">
+          <li>Does not constitute medical advice</li>
+          <li>Does not establish a doctor–patient relationship</li>
+          <li>Does not replace consultation with a licensed provider</li>
+        </ul>
+
+        <h3 className="font-semibold text-green-900">3. Prescription Transfers</h3>
+        <ul className="list-disc ml-5 space-y-1">
+          <li>Transfers are subject to state and federal law</li>
+          <li>Controlled substances may not be transferable</li>
+          <li>Submission does not guarantee completion</li>
+        </ul>
+
+        <h3 className="font-semibold text-green-900">4. Medication Availability</h3>
+        <ul className="list-disc ml-5 space-y-1">
+          <li>Inventory shown is not real-time</li>
+          <li>Availability may change without notice</li>
+          <li>No reservation is created by submission</li>
+        </ul>
+
+        <h3 className="font-semibold text-green-900">5. Pricing Disclaimer</h3>
+        <p>
+          Pricing and copay estimates are not guaranteed and depend on
+          insurance adjudication and pharmacy verification.
+        </p>
+
+        <h3 className="font-semibold text-green-900">6. HIPAA Compliance</h3>
+        <p>
+          Information submitted is protected in accordance with HIPAA
+          regulations and used only for treatment, payment, and
+          healthcare operations.
+        </p>
+
+        <h3 className="font-semibold text-green-900">7. Electronic Communication Consent</h3>
+        <p>
+          You consent to receive communications via phone, SMS, email,
+          or voicemail regarding pharmacy services.
+        </p>
+
+        <h3 className="font-semibold text-green-900">8. Limitation of Liability</h3>
+        <p>
+          Life Care Pharmacy is not liable for delays, shortages,
+          insurance denials, or third-party system failures.
+        </p>
+
+        <h3 className="font-semibold text-green-900">9. Age Requirement</h3>
+        <p>
+          You confirm that you are at least 18 years old or an authorized
+          representative.
+        </p>
+
+        <h3 className="font-semibold text-green-900">10. Changes to Terms</h3>
+        <p>
+          These Terms may be updated at any time. Continued use
+          constitutes acceptance.
+        </p>
+      </div>
+
+      {/* FOOTER */}
+      <div className="border-t px-6 py-4 flex justify-end gap-3">
+        <button
+          onClick={() => setShowTerms(false)}
+          className="px-5 py-2 rounded-lg border border-slate-300 hover:bg-slate-100"
+        >
+          Close
+        </button>
+      </div>
+
+    </div>
+  </div>
+)}
+
+
 
           {/* ===== SUBMIT ===== */}
           <button
             type="submit"
+            disabled={loading}
             className="w-full bg-green-600 hover:bg-green-700 text-white py-5 rounded-2xl font-bold text-lg shadow-lg transition"
           >
-            Request Savings Review
+            {loading ? 'Submitting...' : 'Request Savings Review'}
           </button>
 
           {/* ===== DISCLAIMER ===== */}

@@ -276,6 +276,28 @@
   }
 }
 
+/* allow placeholder detection on iOS date */
+input[type="date"] {
+  position: relative;
+}
+
+/* trick Safari into detecting value */
+input[type="date"]:not([value=""]) + span {
+  opacity: 0;
+}
+
+
+/* allow placeholder detection on iOS date */
+input[type="date"] {
+  position: relative;
+}
+
+/* trick Safari into detecting value */
+input[type="date"]:not([value=""]) + span {
+  opacity: 0;
+}
+
+
 .date-input {
   min-height: 2.5rem; 
   appearance: none;  
