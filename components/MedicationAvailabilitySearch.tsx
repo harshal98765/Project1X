@@ -8,6 +8,13 @@ import { Search, Phone, X } from 'lucide-react'
 /* COMPONENT */
 /* =============================== */
 
+type DrugRow = {
+  DrugName?: string
+  Form?: string
+  Strength?: string
+}
+
+
 export default function MedicationAvailabilitySearch() {
   const [showTerms, setShowTerms] = useState(false)
   const [query, setQuery] = useState('')
@@ -21,20 +28,15 @@ export default function MedicationAvailabilitySearch() {
   /* LOAD CSV */
   /* =============================== */
 
-  useEffect(() => {
-    Papa.parse('/drugs.csv', {
-      header: true,
-      download: true,
-      skipEmptyLines: true,
-      complete: (results) => {
-        const rows = results.data as Array<{
-          DrugName?: string
-          Form?: string
-          Strength?: string
-        }>
+ useEffect(() => {
+  Papa.parse<DrugRow>('/drugs.csv', {
+    header: true,
+    download: true,
+    skipEmptyLines: true,
+    complete: (results: ParseResult<DrugRow>) => {
 
       const formatted = results.data
-        .map(d =>
+        .map((d: DrugRow) =>
           [d.DrugName, d.Form, d.Strength]
             .filter(Boolean)
             .join(' ')
@@ -47,6 +49,7 @@ export default function MedicationAvailabilitySearch() {
     },
   })
 }, [])
+
 
   /* =============================== */
   /* FILTER LOGIC */

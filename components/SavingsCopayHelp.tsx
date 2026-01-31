@@ -73,7 +73,7 @@ export default function SavingsCopayHelp() {
                 <input
                   required
                   type="text" // Start as text to show the placeholder
-                  placeholder="Date of Birth"
+                  placeholder="dd-mm-yyyy"
                   onFocus={(e) => (e.target.type = "date")} // Switch to date when clicked
                   onBlur={(e) => {
                     if (!e.target.value) e.target.type = "text"; // Switch back if empty
