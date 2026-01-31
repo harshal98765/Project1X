@@ -265,8 +265,8 @@ function PharmacistSection() {
               <Image
                 src={service1}
                 alt="Lead Pharmacist"
-                src="/r.png"
-                alt="Uzair Chachar - Lead Pharmacist"
+                // src="/r.png"
+                // alt="Uzair Chachar - Lead Pharmacist"
                 fill
                 className="object-cover rounded-xl shadow-lg"
               />

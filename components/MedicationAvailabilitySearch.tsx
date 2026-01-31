@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useState, useEffect } from 'react'
-import Papa from 'papaparse'
+import Papa, { ParseResult } from "papaparse";
 import { Search, Phone, X } from 'lucide-react'
 
 /* =============================== */
@@ -22,31 +22,31 @@ export default function MedicationAvailabilitySearch() {
   const [medicationList, setMedicationList] = useState<string[]>([])
 
     useEffect(() => {
-    Papa.parse('/drugs.csv', {
-      header: true,
-      download: true,
-      skipEmptyLines: true,
-      complete: (results) => {
-        const rows = results.data as Array<{
-          DrugName?: string
-          Form?: string
-          Strength?: string
-        }>
+  Papa.parse('/drugs.csv', {
+    header: true,
+    download: true,
+    skipEmptyLines: true,
+    complete: (results: ParseResult<{
+      DrugName?: string
+      Form?: string
+      Strength?: string
+    }>) => {
 
-        const formatted = rows
-          .map((d) =>
-            [d.DrugName, d.Form, d.Strength]
-              .filter(Boolean)
-              .join(' ')
-              .replace(/\s+/g, ' ')
-              .trim()
-          )
-          .filter(Boolean)
+      const formatted = results.data
+        .map(d =>
+          [d.DrugName, d.Form, d.Strength]
+            .filter(Boolean)
+            .join(' ')
+            .replace(/\s+/g, ' ')
+            .trim()
+        )
+        .filter(Boolean)
 
-        setMedicationList(formatted)
-      },
-    })
-  }, [])
+      setMedicationList(formatted)
+    },
+  })
+}, [])
+
 
 
   const filtered =

@@ -41,169 +41,173 @@ export default function SavingsCopayHelp() {
           </div>
         ) : (
 
-        /* ================= FORM ================= */
-        <form
-          onSubmit={(e) => {
-            e.preventDefault()
-            setSubmitted(true)
-          }}
-          className="bg-white rounded-3xl shadow-2xl border-2 border-green-200 p-8 md:p-12 space-y-8"
-        >
-
-          {/* ===== PATIENT INFO ===== */}
-          <div>
-            <h3 className="serif-heading text-2xl font-bold text-green-900 mb-4">
-              Patient Information
-            </h3>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {/* ✅ FIRST NAME */}
-              <input
-                required
-                placeholder="First Name"
-                className="input"
-              />
-
-              {/* ✅ LAST NAME */}
-              <input
-                required
-                placeholder="Last Name"
-                className="input"
-              />
-
-              <input
-                required
-                type="date"
-                className="input"
-              />
-
-              <input
-                required
-                placeholder="Phone Number"
-                className="input"
-              />
-            </div>
-          </div>
-
-          {/* ===== MEDICATION INFO ===== */}
-          <div>
-            <h3 className="serif-heading text-2xl font-bold text-green-900 mb-4">
-              Medication Details
-            </h3>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <input
-                required
-                placeholder="Medication name (ex: Ozempic)"
-                className="input"
-              />
-
-              <input
-                required
-                placeholder="Strength (ex: 0.5 mg)"
-                className="input"
-              />
-            </div>
-          </div>
-
-          {/* ===== INSURANCE STATUS ===== */}
-          <div>
-            <h3 className="serif-heading text-2xl font-bold text-green-900 mb-4">
-              Insurance Status
-            </h3>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              {['Have insurance', 'No insurance', 'Not sure'].map((opt) => (
-                <label
-                  key={opt}
-                  className="flex items-center gap-3 border-2 border-slate-200 rounded-xl px-4 py-4 cursor-pointer hover:border-green-400 transition"
-                >
-                  <input type="radio" name="insurance" required />
-                  <span className="font-medium text-slate-700">{opt}</span>
-                </label>
-              ))}
-            </div>
-          </div>
-
-          {/* ===== COST QUESTION ===== */}
-          <div>
-            <h3 className="serif-heading text-2xl font-bold text-green-900 mb-4">
-              Cost Experience
-            </h3>
-
-            <label className="block mb-3 text-slate-700 font-medium">
-              Was this medication expensive at another pharmacy?
-            </label>
-
-            <div className="grid grid-cols-3 gap-4">
-              {['Yes', 'No', 'Not sure'].map((opt) => (
-                <label
-                  key={opt}
-                  className="flex items-center gap-3 border-2 border-slate-200 rounded-xl px-4 py-4 cursor-pointer hover:border-green-400 transition"
-                >
-                  <input type="radio" name="expensive" required />
-                  <span>{opt}</span>
-                </label>
-              ))}
-            </div>
-          </div>
-
-          {/* ===== OPTIONAL INFO ===== */}
-          <div>
-            <h3 className="serif-heading text-2xl font-bold text-green-900 mb-4">
-              Optional Information
-            </h3>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <input
-                placeholder="Current pharmacy name (optional)"
-                className="input"
-              />
-
-              <input
-                placeholder="Approximate price paid or quoted (optional)"
-                className="input"
-              />
-            </div>
-
-            {/* Upload */}
-            <label className="mt-5 flex items-center justify-center gap-3 border-2 border-dashed border-green-300 rounded-xl p-6 cursor-pointer hover:bg-green-50 transition">
-              <Upload className="w-6 h-6 text-green-600" />
-              <span className="text-green-700 font-medium">
-                Upload insurance card (optional)
-              </span>
-              <input type="file" hidden />
-            </label>
-          </div>
-
-          {/* ===== CONSENT ===== */}
-          <label className="flex gap-3 text-sm text-slate-700 bg-green-50 p-5 rounded-xl cursor-pointer">
-            <input type="checkbox" required className="mt-1 accent-green-600" />
-            I authorize Life Care Pharmacy to review available savings options when eligible.
-          </label>
-
-          {/* ===== SUBMIT ===== */}
-          <button
-            type="submit"
-            className="w-full bg-green-600 hover:bg-green-700 text-white py-5 rounded-2xl font-bold text-lg shadow-lg transition"
+          /* ================= FORM ================= */
+          <form
+            onSubmit={(e) => {
+              e.preventDefault()
+              setSubmitted(true)
+            }}
+            className="bg-white rounded-3xl shadow-2xl border-2 border-green-200 p-8 md:p-12 space-y-8"
           >
-            Request Savings Review
-          </button>
 
-          {/* ===== DISCLAIMER ===== */}
-          <div className="pt-6 border-t text-sm text-slate-500 leading-relaxed space-y-2">
-            <p>
-              Savings are not guaranteed and vary by medication and insurance type.
-            </p>
-            <p>
-              Manufacturer programs may not be available for patients with government-funded insurance
-              (including Medicare or Medicaid).
-            </p>
-            <p>
-              Final pricing is confirmed by the pharmacy.
-            </p>
-          </div>
-        </form>
+            {/* ===== PATIENT INFO ===== */}
+            <div>
+              <h3 className="serif-heading text-2xl font-bold text-green-900 mb-4">
+                Patient Information
+              </h3>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {/* ✅ FIRST NAME */}
+                <input
+                  required
+                  placeholder="First Name"
+                  className="input"
+                />
+
+                {/* ✅ LAST NAME */}
+                <input
+                  required
+                  placeholder="Last Name"
+                  className="input"
+                />
+                <input
+                  required
+                  type="text" // Start as text to show the placeholder
+                  placeholder="Date of Birth"
+                  onFocus={(e) => (e.target.type = "date")} // Switch to date when clicked
+                  onBlur={(e) => {
+                    if (!e.target.value) e.target.type = "text"; // Switch back if empty
+                  }}
+                  className="date-input"
+                />
+
+                <input
+                  required
+                  placeholder="Phone Number"
+                  className="input"
+                />
+              </div>
+            </div>
+
+            {/* ===== MEDICATION INFO ===== */}
+            <div>
+              <h3 className="serif-heading text-2xl font-bold text-green-900 mb-4">
+                Medication Details
+              </h3>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <input
+                  required
+                  placeholder="Medication name (ex: Ozempic)"
+                  className="input"
+                />
+
+                <input
+                  required
+                  placeholder="Strength (ex: 0.5 mg)"
+                  className="input"
+                />
+              </div>
+            </div>
+
+            {/* ===== INSURANCE STATUS ===== */}
+            <div>
+              <h3 className="serif-heading text-2xl font-bold text-green-900 mb-4">
+                Insurance Status
+              </h3>
+
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                {['Have insurance', 'No insurance', 'Not sure'].map((opt) => (
+                  <label
+                    key={opt}
+                    className="flex items-center gap-3 border-2 border-slate-200 rounded-xl px-4 py-4 cursor-pointer hover:border-green-400 transition"
+                  >
+                    <input type="radio" name="insurance" required />
+                    <span className="font-medium text-slate-700">{opt}</span>
+                  </label>
+                ))}
+              </div>
+            </div>
+
+            {/* ===== COST QUESTION ===== */}
+            <div>
+              <h3 className="serif-heading text-2xl font-bold text-green-900 mb-4">
+                Cost Experience
+              </h3>
+
+              <label className="block mb-3 text-slate-700 font-medium">
+                Was this medication expensive at another pharmacy?
+              </label>
+
+              <div className="grid grid-cols-3 gap-4">
+                {['Yes', 'No', 'Not sure'].map((opt) => (
+                  <label
+                    key={opt}
+                    className="flex items-center gap-3 border-2 border-slate-200 rounded-xl px-4 py-4 cursor-pointer hover:border-green-400 transition"
+                  >
+                    <input type="radio" name="expensive" required />
+                    <span>{opt}</span>
+                  </label>
+                ))}
+              </div>
+            </div>
+
+            {/* ===== OPTIONAL INFO ===== */}
+            <div>
+              <h3 className="serif-heading text-2xl font-bold text-green-900 mb-4">
+                Optional Information
+              </h3>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <input
+                  placeholder="Current pharmacy name (optional)"
+                  className="input"
+                />
+
+                <input
+                  placeholder="Approximate price paid or quoted (optional)"
+                  className="input"
+                />
+              </div>
+
+              {/* Upload */}
+              <label className="mt-5 flex items-center justify-center gap-3 border-2 border-dashed border-green-300 rounded-xl p-6 cursor-pointer hover:bg-green-50 transition">
+                <Upload className="w-6 h-6 text-green-600" />
+                <span className="text-green-700 font-medium">
+                  Upload insurance card (optional)
+                </span>
+                <input type="file" hidden />
+              </label>
+            </div>
+
+            {/* ===== CONSENT ===== */}
+            <label className="flex gap-3 text-sm text-slate-700 bg-green-50 p-5 rounded-xl cursor-pointer">
+              <input type="checkbox" required className="mt-1 accent-green-600" />
+              I authorize Life Care Pharmacy to review available savings options when eligible.
+            </label>
+
+            {/* ===== SUBMIT ===== */}
+            <button
+              type="submit"
+              className="w-full bg-green-600 hover:bg-green-700 text-white py-5 rounded-2xl font-bold text-lg shadow-lg transition"
+            >
+              Request Savings Review
+            </button>
+
+            {/* ===== DISCLAIMER ===== */}
+            <div className="pt-6 border-t text-sm text-slate-500 leading-relaxed space-y-2">
+              <p>
+                Savings are not guaranteed and vary by medication and insurance type.
+              </p>
+              <p>
+                Manufacturer programs may not be available for patients with government-funded insurance
+                (including Medicare or Medicaid).
+              </p>
+              <p>
+                Final pricing is confirmed by the pharmacy.
+              </p>
+            </div>
+          </form>
         )}
 
         {/* ===== TRUST STRIP ===== */}

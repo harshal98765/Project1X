@@ -275,3 +275,8 @@
     font-size: 2rem;
   }
 }
+
+.date-input {
+  min-height: 2.5rem; 
+  appearance: none;  
+}
